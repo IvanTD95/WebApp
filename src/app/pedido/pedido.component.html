@@ -1,0 +1,74 @@
+<form>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Nombre completo:</label>
+      <input type="text" [(ngModel)] ="nombre" name="nombre" class="form-control" id="formGroupExampleInput" placeholder="Ingrese nombre completo">
+    </div> 
+    <div class="form-group col-md-4">
+        <label for="inputState">Productos:</label>
+        <select (change)="changeProduct($event.target.value)" id="inputState" class="form-control">
+          <option selected>Seleccionar</option>
+          <option *ngFor="let producto of lstProductos" [value]="producto.sku">{{producto.nombreProducto}}</option>
+        </select>
+        <div class="form-group col-md-8">
+            <label for="inputZip">Cantidad</label>
+            <input [(ngModel)] ="cantidad" name="cantidad"  type="number" class="form-control" id="inputZip" placeholder="Ingrese Cantidad">
+          </div>
+    </div>
+      <div class="row">
+          <div class="col-6">
+            <input type="button" (click)="AgregarProducto()" class="btn btn-primary btnSeccion" id="btnSeccion3" value="Agregar producto"/>
+          </div>
+        
+          <div class="col-6">
+            <div>
+               
+            
+                <input type="button" (click)="AgregarPedido()" class="btn btn-primary btnSeccion" id="btnSeccion3" value="Guardar pedido"/>
+            </div>
+            <br>
+            <label for="total">Total:{{total}}</label>
+          </div>
+      </div>
+
+<br>
+</form>
+<br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">SKU</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+         <th scope="col">Cantidad</th>
+         <th scope="col">Total</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="lstProductosSeleccionados != undefined && lstProductosSeleccionados.length > 0" style="font-size:11px;">
+    
+        <tr *ngFor="let row of lstProductosSeleccionados;index as i">
+            <!-- <th class="p-1">{{row.rowNumber}}</th> -->
+            <td class="p-1">
+              {{i+1}}
+            </td>
+            <td class="p-1">
+                {{row.sku}}
+            </td>
+            <td class="p-1">
+                {{row.nombreProducto}}
+            </td>
+            <td class="p-1">
+                {{row.precio}}
+            </td>
+            <td class="p-1">
+                  {{row.cantidad}}
+            </td>
+            <td class="p-1">
+                {{row.cantidad * row.precio}}
+            </td>
+            
+            
+        </tr>
+    </tbody>
+  </table>
